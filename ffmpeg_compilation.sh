@@ -168,13 +168,13 @@ make install
 
 # OpenCV
 cd ~/ffmpeg_sources && \
-wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip
-unzip ${OPENCV_VERSION}.zip && rm ${OPENCV_VERSION}.zip
-mv opencv-${OPENCV_VERSION} OpenCV
-cd OpenCV && mkdir build && cd build
-cmake -D WITH_FFMPEG=ON -DENABLE_SHARED=off ..
-make -j8
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip && \
+unzip ${OPENCV_VERSION}.zip && rm ${OPENCV_VERSION}.zip && \
+mv opencv-${OPENCV_VERSION} OpenCV && \
+cd OpenCV && mkdir build && cd build && \
+cmake -D WITH_FFMPEG=ON -DENABLE_SHARED=off .. && \
+make -j8 && \
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH 
 
 
 # FFmpeg
@@ -184,22 +184,23 @@ tar xjvf ffmpeg-snapshot.tar.bz2 && \
 
 # Get Transform360
 cd ~/ffmpeg_sources && \
-git clone https://github.com/facebook/transform360.git
-cd transform360/Transform360
-cmake ./
-make
-sudo make install
+git clone https://github.com/facebook/transform360.git && \
+cd transform360/Transform360 && \
+cmake ./ && \
+make && \
+sudo make install && \
 
 #Transform360 is implemented in C++ and is invoked by ffmpeg video filter
 cd .. && \
-cp -r Transform360 ~/ffmpeg_sources/ffmpeg
-cd ~/ffmpeg_sources/ffmpeg
-cp Transform360/vf_transform360.c libavfilter/ 
-cd libavfilter
-sed -i '399i extern AVFilter ff_vf_transform360;' allfilters.c
-sed -i '90i OBJS-$(CONFIG_TRANSFORM360_FILTER) += vf_transform360.o' Makefile
-sed -i '27d' && sed - '27i #include "Transform360/Library/VideoFrameTransformHandler.h"' vf_transform360.c
-sed -i '28d' && sed - '28i #include #include "Transform360/Library/VideoFrameTransformHelper.h"' vf_transform360.c
+cp -r Transform360 ~/ffmpeg_sources/ffmpeg && \
+cd ~/ffmpeg_sources/ffmpeg && \
+cp Transform360/vf_transform360.c libavfilter/ && \
+cd libavfilter && \
+sed -i '399i extern AVFilter ff_vf_transform360;' allfilters.c && \
+sed -i '90i OBJS-$(CONFIG_TRANSFORM360_FILTER) += vf_transform360.o' Makefile && \
+sed -i '27d' && sed - '27i #include "Transform360/Library/VideoFrameTransformHandler.h"' vf_transform360.c && \
+sed -i '28d' && sed - '28i #include "Transform360/Library/VideoFrameTransformHelper.h"' vf_transform360.c && \
+cd ..&& \
 
 #Configure ffmpeg in the source folder:
 
