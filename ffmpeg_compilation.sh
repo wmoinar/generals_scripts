@@ -174,6 +174,7 @@ mv opencv-${OPENCV_VERSION} OpenCV && \
 cd OpenCV && mkdir build && cd build && \
 cmake -D WITH_FFMPEG=ON -DENABLE_SHARED=off .. && \
 make -j8 && \
+sudo make install && \
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH 
 
 
