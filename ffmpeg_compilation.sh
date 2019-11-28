@@ -198,8 +198,8 @@ cp Transform360/vf_transform360.c libavfilter/ && \
 cd libavfilter && \
 sed -i '399i extern AVFilter ff_vf_transform360;' allfilters.c && \
 sed -i '90i OBJS-$(CONFIG_TRANSFORM360_FILTER) += vf_transform360.o' Makefile && \
-sed -i '27d' && sed - '27i #include "Transform360/Library/VideoFrameTransformHandler.h"' vf_transform360.c && \
-sed -i '28d' && sed - '28i #include "Transform360/Library/VideoFrameTransformHelper.h"' vf_transform360.c && \
+sed -i '27d' && sed -i '27i #include "Transform360/Library/VideoFrameTransformHandler.h"' vf_transform360.c && \
+sed -i '28d' && sed -i '28i #include "Transform360/Library/VideoFrameTransformHelper.h"' vf_transform360.c && \
 cd ..&& \
 
 #Configure ffmpeg in the source folder:
