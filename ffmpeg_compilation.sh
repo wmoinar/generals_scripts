@@ -240,4 +240,4 @@ rm -rf ~/ffmpeg_sources/
 rm -rf ~/ffmpeg_build/
 
 # List filters
-fmpeg -filters
+ffmpeg -filters
