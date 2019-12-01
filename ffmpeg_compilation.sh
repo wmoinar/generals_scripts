@@ -230,7 +230,14 @@ PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./conf
 PATH="$HOME/bin:$PATH" make && \
 make install && \
 hash -r
+
 source ~/.profile
 sudo ldconfig -v
+cp -r ~/bin/* /bin
 
-~/bin/ffmpeg -filters
+# Deleted files 
+rm -rf ~/ffmpeg_sources/
+rm -rf ~/ffmpeg_build/
+
+# List filters
+fmpeg -filters
